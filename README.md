@@ -1,5 +1,8 @@
 # algorithm_study
 
+알고리즘 문제 풀었던것들 풀이.
+쉬운것들은 패스하고 정리함.
+
 삼각형 출력
 ```
 #include <stdio.h>
