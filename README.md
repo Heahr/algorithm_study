@@ -167,6 +167,172 @@ int main() {
 }
 ```
 
-
+빙고판 (3빙고)
 ```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int arr[5][5] = {0, };
+  for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 5; j++) {
+      scanf("%d", &arr[i][j]);
+    }
+  }
+  
+  int num;
+  int z;
+  int f = 0;
+  for(z = 1; z < 26; z++) {
+    scanf("%d", &num);
+    
+    for(int i = 0; i < 5; i++) {
+      for(int j = 0; j < 5; j++) {
+        if(arr[i][j] == num) {
+          arr[i][j] = 0;
+        }
+      }
+    }
+    
+    for(int i = 0; i < 5; i++) {
+      int b = 0;
+      for(int j = 0; j < 5; j++) {
+        if(arr[i][j] == 0) {
+          b++;
+        }
+      }
+      if(b == 5) {
+        f++;
+      }
+    }
+    
+    for(int i = 0; i < 5; i++) {
+      int b = 0;
+      for(int j = 0; j < 5; j++) {
+        if(arr[j][i] == 0) {
+          b++;
+        }
+      }
+      if(b == 5) {
+        f++;
+      }
+    }
+    
+    if(!arr[0][0] && !arr[1][1] && !arr[2][2] && !arr[3][3] && !arr[4][4]) {
+      f++;
+    }
+    
+    if(!arr[0][4] && !arr[1][3] && !arr[2][2] && !arr[3][1] && !arr[4][0]) {
+      f++;
+    }
+    
+    if(f >= 3) {
+      break;
+    } else {
+      f = 0;
+    }
+  }
+  
+  printf("%d", z);
+  return 0;
+}
+```
+
+공연장 대기열 만들기.
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int a, b;
+  scanf("%d %d", &a, &b);
+  int f;
+  scanf("%d", &f);
+  
+  int arr[1100][1100] = {0, };
+  int num1 = a;
+  int num2 = b;
+  
+  int j=0;
+  int o=b;
+  
+  int num = 1;
+  
+  a--;
+  
+  if(5 <= b && a <= 1000 && 1 <= a*b && a*b <= 100000000) {
+    while(1) {
+      for(int k = 0; k < b; k++) {
+        o = o-1;
+        arr[o][j] = num;
+        num++;
+      }
+      b--;
+      if(b < 0) {
+        break;
+      }
+      
+      for(int l = 0; l < a; l++) {
+        j = j+1;
+        arr[o][j] = num;
+        num++;
+      }
+      a--;
+      if(a < 0) {
+        break;
+      }
+      
+      for(int k = 0; k < b; k++) {
+        o = o+1;
+        arr[o][j] = num;
+        num++;
+      }
+      b--;
+      if(b < 0) {
+        break;
+      }
+      
+      for(int l = 0; l < a; l++) {
+        j = j-1;
+        arr[o][j] = num;
+        num++;
+      }
+      a--;
+      if(a < 0) {
+        break;
+      }
+    }
+  }
+  
+  
+  
+  int q = 0;
+  int w = 0;
+  for(int num3 = 0; num3 < num2; num3++) {
+    for(int num4 = 0; num4 < num1; num4++) {
+      if(f == arr[num3][num4]) {
+        q = num3+1;
+        w = num4+1;
+      }
+    }
+  }
+  
+  q = num2 - q + 1;
+  if(q == 0 || w == 0) {
+    printf("0");
+  } else {
+    printf("%d %d", w, q);
+  }
+  
+  
+  // for(int num3 = 0; num3 < num2; num3++) {
+  //   for(int num4 = 0; num4 < num1; num4++) {
+  //   printf("%d ", arr[num3][num4]);
+  //   }
+  //   printf("\n");
+  // }
+  return 0;
+}
 ```
