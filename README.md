@@ -336,3 +336,99 @@ int main() {
   return 0;
 }
 ```
+
+baseball 게임 만들기.
+
+4개의 조건을 제시하고 그 조건에 부합하는 결과값이 얼마나 나오는지 출력하라.
+-> 생각보다 조건에 맞는 정답을 찾는데 오랜시간이 걸렸다. 결과값에 자꾸 집착하다 보니 제시된 값들에 대해 접근하려 생각하지 않았다.
+알고리즘을 계속해서 풀어가면서 이런 틀을 좀 계속해서 벗어나야 할 것 같다. 자꾸 생각이 갇히는 경우가 드문드문 발생한다.
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int run;
+  while(1) {
+    scanf("%d", &run);
+    if(1 <= run && run <= 100){
+      break;
+    }
+  }
+  
+  int count = 0;
+  int f = 0;
+  int s, b;
+  
+  int arr[101][5] = {0, };
+  
+  for(int i = 0; i < run; i++) {
+    while(1) {
+      scanf("%d", &arr[i][0]);
+      if(1 <= arr[i][0] / 100 && arr[i][0] / 100 <= 9) {
+        break;
+      } else {
+        continue;
+      }
+    }
+    scanf("%d ", &arr[i][1]);
+    scanf("%d\n", &arr[i][2]);
+    // scanf("%d ", &arr[i][3]);
+    // scanf("%d", &arr[i][4]);
+  }
+  for(int i = 1; i < 10; i++) {
+    for(int j = 1; j < 10; j++) {
+      for(int k = 1; k < 10; k++) {
+        if(i == j || j == k || k == i) {
+          continue;
+        }
+        for(int z = 0; z < run; z++) {
+          
+          if(i == arr[z][0] / 100){
+            s++;
+          } else if (i == arr[z][0] / 10 - (arr[z][0] / 100) * 10) {
+            b++;
+          } else if (i == arr[z][0] - (arr[z][0] / 10) * 10) {
+            b++;
+          }
+          
+          if(j == arr[z][0] / 10 - (arr[z][0] / 100) * 10){
+            s++;
+          } else if (j == arr[z][0] / 100) {
+            b++;
+          } else if (j == arr[z][0] - (arr[z][0] / 10) * 10) {
+            b++;
+          }
+          
+          if(k == arr[z][0] - (arr[z][0] / 10) * 10){
+            s++;
+          } else if (k == arr[z][0] / 10 - (arr[z][0] / 100) * 10) {
+            b++;
+          } else if (k == arr[z][0] / 100) {
+            b++;
+          }
+          if(s == arr[z][1] && b == arr[z][2]) {
+            count++;
+            s = 0;
+            b = 0;
+          } else {
+            s = 0;
+            b = 0;
+          }
+        }
+        
+        if(count == run) {
+          f++;
+          count = 0;
+        } else {
+          count = 0;
+        }
+      }
+    }
+  }
+  
+  printf("%d", f);
+  return 0;
+  
+}
+```
