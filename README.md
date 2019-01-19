@@ -432,3 +432,107 @@ int main() {
   
 }
 ```
+
+직사각형 네 개의 합집합 면적 구하기
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int arr[100][100] = {0,};
+  
+  int a,b,c,d;
+  for(int z = 0; z < 4; z++) {
+    scanf("%d %d %d %d", &a ,&b ,&c ,&d);
+    for(int i = a ; i < c; i++) {
+      for(int j = b ; j < d; j++) {
+        arr[i][j] = 1;
+      }
+    }
+  }
+  
+  int count = 0;
+  for(int i = 0; i < 100; i++) {
+    for(int j = 0; j < 100; j++) {
+      if(arr[i][j] == 1) {
+        count++;
+      }
+    }
+  }
+  
+  printf("%d", count);
+  return 0;
+}
+```
+
+원하는 횟수의 큰 수 찾기
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int n, arr[100010];
+  int a;
+  
+  scanf("%d ", &n);
+  scanf("%d\n", &a);
+  
+  for(int i = 0; i < n; i++) {
+    scanf("%d", &arr[i]);
+  }
+  
+  for(int i = 0; i < n; i++) {
+    for(int j = 0; j < n-i-1; j++) {
+      if(arr[j] > arr[j+1]) {
+        int temp;
+        temp = arr[j];
+        arr[j] = arr[j+1];
+        arr[j+1] = temp;
+      }
+    }
+    
+    if(i+1 == a) {
+      printf("%d", arr[n-a]);
+      break;
+    }
+  }
+  
+  return 0;
+}
+```
+
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int count;
+  scanf("%d", &count);
+  
+  int arr[count];
+  for(int i = 0; i < count; i++) {
+    scanf("%d", &arr[i]);
+  }
+  
+  int num = 0;
+  for(int i = 0; i < count; i++) {
+    if(i == 0) {
+      printf("%d ", arr[i]);
+      num = num + arr[i];
+      continue;
+    }
+    
+    for(int j = 0; j < 10000000; j++) {
+      if((num + j)/(i+1) == arr[i]) {
+        printf("%d ", j);
+        num = num + j;
+        break;
+      }
+    }
+  }
+  return 0;
+}
+```
