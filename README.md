@@ -536,3 +536,80 @@ int main() {
   return 0;
 }
 ```
+
+벌꿀집 모양 값 찾기. ex) 입력값 13 -> 출력값 3, 입력값 58 -> 출력값 5
+```
+#include <stdio.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num;
+  scanf("%d", &num);
+  
+  int limit = 1000000;
+  int num1 = 1;
+  for(int i = 0; i < limit; i++) {
+    if(num == 1) {
+      printf("1");
+      break;
+    } else if (num1 <= num && num <= num1 + (i+1)*6) {
+      printf("%d", i+2);
+      break;
+    } else {
+      num1 = num1 + (i+1)*6;
+    }
+  }
+  return 0;
+}
+```
+
+입력값중 소수찾기 ex) 입력 -> 4 1 3 5 7 출력-> 3
+```
+#include <stdio.h>
+
+int prime( int a );
+
+int main() {
+	int input;
+	scanf( "%d", &input );
+	
+	int arr[input];
+	for(int i = 0; i < input; i++) {
+	  scanf("%d ", &arr[i]);
+	}
+
+  int count = 0;
+	for(int i = 0; i < input; i++) {
+
+		if( prime(arr[i]) == 1 ) {
+		  count++;
+		}
+		//if( prime(input) == 0 )	-> 소수가 아님.
+	}
+  
+  printf("%d", count);
+	return 0;
+}
+
+int prime( int a )
+{
+	int j;
+
+	for( j=2 ; j<=a ; j++ )
+	{
+		if( a%j == 0 )
+		{
+			if( a == j )	return 1;
+			if( a != j )	return 0;
+		}
+	}
+
+	return 0;
+}
+```
+
+
+```
+
+```
