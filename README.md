@@ -609,7 +609,666 @@ int prime( int a )
 }
 ```
 
+스페이스바 없애기 ///Please do not touch anything -> Pleasedonottouchanything
+```
+#include <stdio.h>
+#include <string.h>
 
+int main() {
+
+  //Please Enter Your Code Here
+  char str[100000];
+  scanf("%[^\n]s", str);
+  
+  for(int i = 0; i < 100000; i++) {
+    if(str[i] == ' ') {
+      continue;
+    } else if(str[i] == '\0') {
+      break;
+    } else {
+      printf("%c", str[i]);
+    }
+  }
+  
+  return 0;
+}
 ```
 
+문자열 정렬하기 
+9		->
+acid		-> acid
+apple		-> acquire
+banana		-> apple
+acquire		-> banana
+cat		-> cat
+crop		-> cat
+crab		-> crab
+power		-> crop
+cat		-> power
+```
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num;
+  scanf("%d", &num);
+  
+  char str[num][100];
+  
+  for(int i = 0; i < num; i++) {
+    scanf("%s", str[i]);
+  }
+  
+  char temp[1000];
+  // char tmp;
+  
+  for(int i = 0; i < num; i++) {
+    for(int j = i+1; j < num; j++) {
+      int eq = strcmp(str[i], str[j]);
+      if(eq == 0) {
+        continue;
+      } else if(eq > 0) {
+        strcpy(temp, str[i]);
+        strcpy(str[i], str[j]);
+        strcpy(str[j], temp);
+      }
+    }
+  }
+  
+  for(int i = 0; i < num; i++) {
+    printf("%s", str[i]);
+    printf("\n");
+  }
+  
+  return 0;
+}
+```
+
+문자열 포함 관계 Watermelon / melon -> YES
+```
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  char str1[1000];
+  char str2[1000];
+  
+  char temp[1000];
+  
+  scanf("%s", str1);
+  scanf("%s", str2);
+  
+  int num1 = strlen(str1);
+  int num2 = 0;
+  int num3 = strlen(str2);
+  
+  int f = 0;
+  
+  for(int i = 0; i < num1; i++) {
+    int inx = i;
+    
+    if(str1[i] == str2[num2]) {
+      
+      for(int j = 0; j < num3; j++) {
+        if(str1[inx+j] != str2[j]) {
+          break;
+        } else if(j+1 == num3) {
+          printf("YES");
+          f = 1;
+        }
+        
+      }
+      
+    }
+    if(i+1 == num1) {
+      printf("NO");
+      break;
+    } else if(f == 1) {
+      break;
+    }
+  }
+  
+  return 0;
+}
+```
+
+문자열 압축 AAABBBBBCCCCDDDDEFFF -> 3A5B4C4DE3F
+```
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+  //Please Enter Your Code Here
+  char str[1000];
+  scanf("%s", str);
+  
+  int num = strlen(str);
+  
+  int count = 0;
+  int i, j;
+  for(i = 0; i < num; i++) {
+    if(str[i] == str[i+1]) {
+      count++;
+    } else if(str[i] != str[i+1] && count == 0) {
+      printf("%c", str[i]);
+    } else {
+      printf("%d%c", count+1, str[i]);
+      count = 0;
+    }
+  }
+  
+  return 0;
+}
+```
+
+큰자리수 덧셈하기
+123112981293812938139 -> 124411909784914159950
+1298928491101221811
+```
+#include <stdio.h>
+#include <string.h>
+
+/*
+void reverse(char *string, int num) {
+  char temp;
+  if(num % 2 == 0) {
+    for(int i = 0; i < num; i++) {
+      temp = string[i];
+      string[i] = string[num-i];
+      string[num-i] = temp;
+    }
+  } else {
+    for(int i = 1; i <= num; i++) {
+      temp = string[num+i];
+      string[num+i] = string[num-i];
+      string[num-i] = temp;
+    }
+  }
+}
+
+void sum(char *string1, char *string2, int num1, int num2) {
+  int a;
+  int q;
+  int u = 0;
+  int i;
+  for(i = 0; i < num2; i++) {
+    a = string1[i] + string2[i];
+    q = (string1[i] + string2[i]) % 10;
+    string1[i] = q + u;
+    u = a / 10;
+  }
+  
+  string1[i] += u;
+  for(; i < num1; i++) {
+    if(string1[i] > 10) {
+      a = string1[i];
+      string1[i] = string1[i] % 10;
+      string1[i+1] += a / 10;
+    }
+  }
+}
+*/
+
+#define StoD(X) ( X == 0 ? 0 : X - '0' )
+
+void reverse(char *arr, int len) {
+  char temp;
+  int i;
+  for(int i = 0; i < len/2; i++) {
+    temp = arr[i];
+    arr[i] = arr[len-1-i];
+    arr[len-1-i] = temp;
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  char a[3][100002];
+  int len, i, j, up = 0;
+  
+  scanf("%s", a[0]);
+  scanf("%s", a[1]);
+  
+  if(strlen(a[0]) > strlen(a[1])) {
+    len = strlen(a[0]);
+  } else len = strlen(a[1]);
+  
+  reverse(a[0], strlen(a[0]));
+  reverse(a[1], strlen(a[1]));
+  
+  for(i = 0; i <= len; i++) {
+    a[2][i] = (StoD(a[0][i]) + StoD(a[1][i]) + up) % 10 + '0';
+    
+    if((StoD(a[0][i]) + StoD(a[1][i]) + up) > 9) {
+      up = 1;
+    } else {
+      up = 0;
+    }
+  }
+  
+  if(a[2][len] == '0') {
+    a[2][len] = 0;
+  }
+  
+  reverse(a[2], strlen(a[2]));
+  
+  printf("%s", a[2]);
+  
+  return 0;
+}
+```
+
+mountain 
+개인적으로 좀 재미있었다고 생각하는 이유중에 하나는 규칙이 일단 잘보였다는 이유가 하나가 될수 있을거같다. 이정도로 잘보였나? 이런규칙을 보고 하면 잘풀리구나 했던 기억이 있다.
+
+3 -> 1213121
+5 -> 1213121412131215121312141213121
+```
+#include <stdio.h>
+
+int mountain (int num) {
+  if(num > 0) {
+    mountain(num-1);
+    printf("%d", num);
+    mountain(num-1);
+  } else {
+    return 0;
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num;
+  scanf("%d", &num);
+  
+  mountain(num);
+  return 0;
+}
+```
+
+
+순열구하기
+4 2 ->
+ab
+ac
+ad
+ba
+bc
+bd
+ca
+cb
+cd
+da
+db
+dc
+```
+#include <stdio.h>
+#include <string.h>
+
+//int al[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+int al[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+int s(char *c, int num1, int num2, int num3) {
+  if(num3 == 0) {
+    for(int i = 0; i < num2; i++) {
+      for( int j = 0; j < num2; j++) {
+        if(i == j) {
+          continue;
+        } else if (c[i] == c[j]) {
+          return 0;
+        }
+      }
+    }
+    for(int i = num2; i > 0; i--) {
+      printf("%c", c[i-1]);
+    }
+    printf("\n");
+  } else {
+    for(int i = 0; i < num1; i++) {
+      c[num3-1] = al[i]; 
+      s(c, num1, num2, num3-1);
+    }
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num1, num2;
+  scanf("%d %d", &num1, &num2);
+  
+  char t[num2];
+  
+  s(t, num1, num2, num2);
+  return 0;
+}
+```
+
+
+나누기
+2	->897
+< > 	  021
+
+9			->9567843012
+> < < < > > > < <	  1023765489
+```
+#include <stdio.h>
+#include <string.h>
+
+int f = 0;
+int t = 0;
+
+int inequal (char *str, int *arr, int num, int count) {
+  if(f == 1) {
+    return 0;
+  }
+  
+  if(num+1 == count) {
+    for(int i = 0; i < num+1; i++) {
+      printf("%d", arr[i]);
+    }
+    f = 1;
+    return 0;
+  }
+  
+  for(int j = 9; j >= 0; j--) {
+    //중복검사
+    int c = 0;
+    for(int k = 0; k < count; k++) {
+      if(arr[k] == j) {
+        c = 1;
+        break;
+      }
+    }
+    if(c == 1) {
+      continue;
+    }
+    
+    //첫값시작
+    arr[count] = j;
+    if(count == 0) {
+      inequal(str, arr, num, count+1);
+    }
+    
+    //맞으면 더들어가고 틀리면 나오기.
+    if(str[count-1] == '<') {
+      if(arr[count-1] < arr[count]) {
+        inequal(str, arr, num, count+1);
+      } else {
+        continue;
+      }
+    } else if(str[count-1] == '>') {
+      if(arr[count-1] > arr[count]) {
+        inequal(str, arr, num, count+1);
+      } else {
+        continue;
+      }
+    }
+  }
+}
+
+int outequal (char *str, int *arr, int num, int count) {
+  if(t == 1) {
+    return 0;
+  }
+  
+  if(num+1 == count) {
+    for(int i = 0; i < num+1; i++) {
+      printf("%d", arr[i]);
+    }
+    t = 1;
+    return 0;
+  }
+  
+  for(int j = 0; j < 10; j++) {
+    //중복검사
+    int c = 0;
+    for(int k = 0; k < count; k++) {
+      if(arr[k] == j) {
+        c = 1;
+        break;
+      }
+    }
+    if(c == 1) {
+      continue;
+    }
+    
+    //첫값시작
+    arr[count] = j;
+    if(count == 0) {
+      outequal(str, arr, num, count+1);
+    }
+    
+    //맞으면 더들어가고 틀리면 나오기.
+    if(str[count-1] == '<') {
+      if(arr[count-1] < arr[count]) {
+        outequal(str, arr, num, count+1);
+      } else {
+        continue;
+      }
+    } else if(str[count-1] == '>') {
+      if(arr[count-1] > arr[count]) {
+        outequal(str, arr, num, count+1);
+      } else {
+        continue;
+      }
+    }
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num;
+  scanf("%d\n", &num);
+  
+  char str[num];
+  for(int i = 0; i < num; i++) {
+    scanf("%c ", &str[i]);
+  }
+  
+  int arr[num];
+  
+  inequal(str, arr, num, 0);
+  printf("\n");
+  outequal(str, arr, num, 0);
+  
+  return 0;
+}
+```
+
+
+합병정렬
+
+10			-> -1 2 2 3 4 5 7 8 9 10
+2 5 3 4 8 7 -1 9 10 2	  
+```
+#include <stdio.h>
+int numbers[10000000];
+void merging(int arr[], int s1, int e1, int s2, int e2) {
+  int p, q;
+  int temp[10000000];
+  int temp_inx = 0;
+  
+  p = s1;
+  q = s2;
+  
+  while (p <= e1 && q <= e2) {
+    if(arr[p] <= arr[q]) {
+      temp[temp_inx++] = arr[p];
+      p++;
+    } else {
+      temp[temp_inx++] = arr[q];
+      q++;
+    }
+  }
+  
+  if(p > e1) {
+    for(int i = q; i <= e2; i++) {
+      temp[temp_inx++] = arr[i];
+    }
+  } else {
+    for(int i = p; i <= e1; i++) {
+      temp[temp_inx++] = arr[i];
+    }
+  }
+  
+  for(int i = s1; i <= e2; i++) {
+    arr[i] = temp[i-s1];
+  }
+}
+
+void mergeSort(int arr[], int start, int end) {
+  if(start >= end) {
+    return;
+  } else {
+    int mid = (start+end) / 2;
+    
+    mergeSort(arr, start, mid);
+    mergeSort(arr, mid+1, end);
+    
+    merging(arr, start, mid, mid+1, end);
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  int n;
+  
+  
+  scanf("%d", &n);
+  
+  for(int i = 0; i < n; i++) {
+    scanf("%d", &numbers[i]);
+  }
+  
+  mergeSort(numbers, 0, n-1);
+  
+  for(int i = 0; i < n; i++) {
+    printf("%d ", numbers[i]);
+  }
+  return 0;
+}
+```
+
+
+숫자박스
+5
+6 3 2 10 -10		-> 1 0 0 1 1 0 0 1
+8
+10 9 -5 2 3 4 5 -10
+```
+#include <stdio.h>
+
+void merging(int arr[], int s1, int e1, int s2, int e2) {
+  int p, q;
+  int temp[10000000];
+  int inx = 0;
+  
+  p = s1;
+  q = s2;
+  
+  while(p <= e1 && q <= e2) {
+    if(arr[p] <= arr[q]) {
+      temp[inx++] = arr[p];
+      p++;
+    } else {
+      temp[inx++] = arr[q];
+      q++;
+    }
+  }
+  
+  if(p > e1) {
+    for(int i = q; i <= e2; i++) {
+      temp[inx++] = arr[i];
+    }
+  } else {
+    for(int i = p; i <= e1; i++) {
+      temp[inx++] = arr[i];
+    }
+  }
+  
+  for(int i = s1; i <= e2; i++) {
+    arr[i] = temp[i-s1];
+  }
+}
+
+void sort(int arr[], int start, int end) {
+  if(start >= end) {
+    return;
+  } else {
+    int mid = (start + end) / 2;
+    
+    sort(arr, start, mid);
+    sort(arr, mid+1, end);
+    
+    merging(arr, start, mid, mid+1, end);
+  }
+}
+
+int binarySearch(int arr[], int start, int end, int value) {
+  if(start > end) {
+    return -1;
+  } else if(start == end) {
+    if(arr[start] == value) {
+      return start;
+    } else {
+      return -1;
+    }
+  } else {
+    int mid = (start + end) / 2;
+    if(arr[mid] == value) {
+      return mid;
+    } else if(arr[mid] > value) {
+      return binarySearch(arr, start, mid-1, value);
+    } else {
+      return binarySearch(arr, mid+1, end, value);
+    }
+  }
+}
+
+int main() {
+
+  //Please Enter Your Code Here
+  int num;
+  scanf("%d", &num);
+  
+  int arr[10000000];
+  for(int i = 0; i < num; i++) {
+    scanf("%d", &arr[i]);
+  }
+  
+  sort(arr, 0, num-1);
+  // for(int i = 0; i < num; i++) {
+  //   printf("%d ", arr[i]);
+  // }
+  
+  int num1;
+  scanf("%d", &num1);
+  
+  int arr1[10000000];
+  for(int i = 0; i < num1; i++) {
+    scanf("%d", &arr1[i]);
+  }
+
+  for(int i = 0; i < num1; i++) {
+    int a = binarySearch(arr, 0, num-1, arr1[i]);
+    if(a == -1) {
+      printf("0");
+    } else {
+      printf("1");
+    }
+    printf("\n");
+  }
+
+  return 0;
+}
 ```
